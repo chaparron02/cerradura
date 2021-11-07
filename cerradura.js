@@ -40,6 +40,7 @@ const database = getDatabase(app);
 const dbRef = ref(database);
 get(child(dbRef, "locks/test"))
   .then((snapshot) => {
+	console.log(snapshot)
     if (snapshot.exists()) {
       console.log(snapshot.val());
     } else {

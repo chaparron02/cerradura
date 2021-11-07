@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const Gpio = require("pigpio").Gpio;
 const printMessage = require("print-message");
-const execSync = require("child_process").execSync;
+const figlet = require("figlet");
 const { initializeApp } = require("firebase/app");
 const { getDatabase, ref, onValue, child, get } = require("firebase/database");
 
@@ -64,7 +64,7 @@ boton.on("interrupt", function (level) {
 });
 
 function abrir() {
-  execSync('figlet -f slant -c "Abriendo cerradura" | lolcat', { encoding: "utf-8" });
+  figlet("Abriendo cerradura");
   printMessage("Abriendo cerradura");
   motor.servoWrite(cerrado);
   led.digitalWrite(1);
@@ -77,7 +77,7 @@ function abrir() {
 }
 
 function cerrar() {
-  execSync('figlet -f slant -c "Cerrando cerradura" | lolcat', { encoding: "utf-8" });
+  figlet("Cerrando cerradura");
   printMessage("Cerrando cerradura");
   motor.servoWrite(abierto);
   led.digitalWrite(0);

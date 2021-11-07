@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const Gpio = require("pigpio").Gpio;
-const lolcatjs = require('lolcatjs');
+const lolcatjs = require("lolcatjs");
 const figlet = require("figlet");
 const { initializeApp } = require("firebase/app");
 const { getDatabase, ref, onValue, child, get } = require("firebase/database");
@@ -96,6 +96,7 @@ function print(message) {
       console.dir(err);
       return;
     }
+    console.clear();
     lolcatjs.options.seed = Math.round(Math.random() * 1000);
     lolcatjs.options.colors = true;
     lolcatjs.fromString(data);

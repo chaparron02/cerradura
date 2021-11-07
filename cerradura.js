@@ -37,6 +37,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+/*
 const dbRef = ref(database);
 get(child(dbRef, "locks/Test"))
   .then((snapshot) => {
@@ -48,8 +49,13 @@ get(child(dbRef, "locks/Test"))
   })
   .catch((error) => {
     console.error(error);
-  });
-//const usersRef  = ref(database, 'locks');
+  });*/
+
+const starCountRef = ref(database, "locks/Test");
+onValue(starCountRef, (snapshot) => {
+  const data = snapshot.val();
+  console.log(data);
+});
 
 //abrir();
 

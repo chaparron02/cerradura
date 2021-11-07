@@ -1,42 +1,67 @@
 #!/usr/bin/env node
-var Gpio = require("pigpio").Gpio
+const Gpio = require("pigpio").Gpio0;
+const { initializeApp } = require("firebase/app");
+const { getDatabase, ref, onValue, child, get } = require("firebase/database");
 
 // ***************Inicio Variables*************
 // tiempos para ajustar el angulo del motor
-var abierto = 1000;
-var cerrado = 2200;
+const abierto = 1000;
+const cerrado = 2200;
 
 // puntos del motor
-var puntoMotor = 14;
-var puntoBoton = 4
-var puntoLed = 17
+const puntoMotor = 14;
+const puntoBoton = 4;
+const puntoLed = 17;
 
-
-var estadoCerradura = true
+const estadoCerradura = true;
 
 // ***************Fin Variables*************
 
 // configuración del motor
-var motor = new Gpio(puntoMotor, { mode: Gpio.OUTPUT })
+const motor = new Gpio(puntoMotor, { mode: Gpio.OUTPUT });
 
-var boton = new Gpio(puntoBoton, {
-    mode: Gpio.INPUT,
-    pullUpDown: Gpio.PUD_DOWN,
-    edge: Gpio.FALLING_EDGE,
+const boton = new Gpio(puntoBoton, {
+  mode: Gpio.INPUT,
+  pullUpDown: Gpio.PUD_DOWN,
+  edge: Gpio.FALLING_EDGE,
+});
+
+const led = new Gpio(puntoLed, { mode: Gpio.OUTPUT });
+
+// configuración de FireBase
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCxiv1_oGdPCaWEoOhwcUYn0mfD8cFWLo8",
+  authDomain: "domotic-ur.firebaseapp.com",
+  databaseURL: "https://domotic-ur-default-rtdb.firebaseio.com/",
+  storageBucket: "bucket.appspot.com",
+};
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const dbRef = ref(database);
+get(child(dbRef, "lock"))
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+    } else {
+      console.log("No data available");
+    }
   })
+  .catch((error) => {
+    console.error(error);
+  });
+//const usersRef  = ref(database, 'locks');
 
-var led = new Gpio(puntoLed, { mode: Gpio.OUTPUT });
+//abrir();
 
-abrir()
-
-boton.on('interrupt', function (level) {
-	if (level == 0) {
-		if (estadoCerradura) {
-			cerrar()
-		} else {
-			abrir()
-		}
-	}
+boton.on("interrupt", function (level) {
+  if (level == 0) {
+    if (estadoCerradura) {
+      cerrar();
+    } else {
+      abrir();
+    }
+  }
 });
 
 /* actualmente parte de BLYNK migrar a FIREBASE
@@ -53,20 +78,23 @@ v0.on('write', function(param) {
 */
 
 function abrir() {
-	motor.servoWrite(cerrado);
-	led.digitalWrite(1);
-	estadoCerradura = true
+  motor.servoWrite(cerrado);
+  led.digitalWrite(1);
+  estadoCerradura = true;
 
-  	
-  	// Despues de 1.5 segundos, apagamos el motor para que no se dañe
-  	setTimeout(function(){motor.servoWrite(0)}, 1500)
+  // Despues de 1.5 segundos, apagamos el motor para que no se dañe
+  setTimeout(function () {
+    motor.servoWrite(0);
+  }, 1500);
 }
 
 function cerrar() {
-	motor.servoWrite(abierto);
-	led.digitalWrite(0);
-	estadoCerradura = false
+  motor.servoWrite(abierto);
+  led.digitalWrite(0);
+  estadoCerradura = false;
 
-  	// Despues de 1.5 segundos, apagamos el motor para que no se dañe
-  	setTimeout(function(){motor.servoWrite(0)}, 1500)
+  // Despues de 1.5 segundos, apagamos el motor para que no se dañe
+  setTimeout(function () {
+    motor.servoWrite(0);
+  }, 1500);
 }

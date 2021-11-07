@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const Gpio = require("pigpio").Gpio;
-const printMessage = require("print-message");
+const lolcatjs = require('lolcatjs');
 const figlet = require("figlet");
 const { initializeApp } = require("firebase/app");
 const { getDatabase, ref, onValue, child, get } = require("firebase/database");

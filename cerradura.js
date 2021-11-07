@@ -37,27 +37,18 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-/*
-const dbRef = ref(database);
-get(child(dbRef, "locks/Test"))
-  .then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log(snapshot.val());
-    } else {
-      console.log("No data available");
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });*/
 
-const starCountRef = ref(database, "locks/Test");
+const starCountRef = ref(database, "locks/Test/is_locked");
 onValue(starCountRef, (snapshot) => {
   const data = snapshot.val();
-  console.log(data);
+  if (data) {
+    cerrar();
+  } else {
+    abrir();
+  }
 });
 
-//abrir();
+abrir();
 
 boton.on("interrupt", function (level) {
   if (level == 0) {
@@ -68,19 +59,6 @@ boton.on("interrupt", function (level) {
     }
   }
 });
-
-/* actualmente parte de BLYNK migrar a FIREBASE
-v0.on('write', function(param) {
-	console.log('V0:', param);
-  	if (param[0] === '0') { //unlocked
-  		cerrar()
-  	} else if (param[0] === '1') { //locked
-  		abrir()
-  	} else {
-  		blynk.notify("Door lock button was pressed with unknown parameter");
-  	}
-});
-*/
 
 function abrir() {
   motor.servoWrite(cerrado);

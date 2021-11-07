@@ -6,7 +6,9 @@
   "license": "ISC",
   "dependencies": {
     "blynk-library": "^0.5.4",
+    "figlet": "^1.5.2",
     "firebase": "^9.3.0",
+    "lolcatjs": "^2.4.1",
     "onoff": "^6.0.3",
     "pigpio": "^3.3.1",
     "print-message": "^3.0.1"

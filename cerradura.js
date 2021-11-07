@@ -62,6 +62,7 @@ boton.on("interrupt", function (level) {
 });
 
 function abrir() {
+  console.log("Abriendo cerradura");
   motor.servoWrite(cerrado);
   led.digitalWrite(1);
   estadoCerradura = true;
@@ -73,6 +74,7 @@ function abrir() {
 }
 
 function cerrar() {
+  console.log("Cerrando cerradura");
   motor.servoWrite(abierto);
   led.digitalWrite(0);
   estadoCerradura = false;

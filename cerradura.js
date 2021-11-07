@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const Gpio = require("pigpio").Gpio0;
+const Gpio = require("pigpio").Gpio;
 const { initializeApp } = require("firebase/app");
 const { getDatabase, ref, onValue, child, get } = require("firebase/database");
 

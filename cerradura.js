@@ -13,7 +13,7 @@ const puntoMotor = 14;
 const puntoBoton = 4;
 const puntoLed = 17;
 
-const estadoCerradura = true;
+let estadoCerradura = true;
 
 // ***************Fin Variables*************
 

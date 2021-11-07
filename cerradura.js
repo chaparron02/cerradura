@@ -64,7 +64,7 @@ boton.on("interrupt", function (level) {
 });
 
 function abrir() {
-  figlet('Abriendo cerradura');
+  print("Abriendo cerradura");
   console.log("Abriendo cerradura");
   motor.servoWrite(cerrado);
   led.digitalWrite(1);
@@ -77,7 +77,7 @@ function abrir() {
 }
 
 function cerrar() {
-  figlet('Cerrando cerradura');
+  print("Cerrando cerradura");
   console.log("Cerrando cerradura");
   motor.servoWrite(abierto);
   led.digitalWrite(0);
@@ -87,4 +87,15 @@ function cerrar() {
   setTimeout(function () {
     motor.servoWrite(0);
   }, 1500);
+}
+
+function print(message) {
+  figlet(message, function (err, data) {
+    if (err) {
+      console.log("Something went wrong...");
+      console.dir(err);
+      return;
+    }
+    console.log(data);
+  });
 }

@@ -64,7 +64,7 @@ boton.on("interrupt", function (level) {
 });
 
 function abrir() {
-  figlet("Abriendo cerradura");
+  figlet.text('Abriendo cerradura');
   printMessage("Abriendo cerradura");
   motor.servoWrite(cerrado);
   led.digitalWrite(1);
@@ -77,7 +77,7 @@ function abrir() {
 }
 
 function cerrar() {
-  figlet("Cerrando cerradura");
+  figlet.text('Cerrando cerradura');
   printMessage("Cerrando cerradura");
   motor.servoWrite(abierto);
   led.digitalWrite(0);

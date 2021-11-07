@@ -38,9 +38,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const dbRef = ref(database);
-get(child(dbRef, "locks/test"))
+get(child(dbRef, "locks/Test"))
   .then((snapshot) => {
-	console.log(snapshot)
     if (snapshot.exists()) {
       console.log(snapshot.val());
     } else {

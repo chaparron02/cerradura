@@ -34,7 +34,6 @@ const firebaseConfig = {
   apiKey: "AIzaSyCxiv1_oGdPCaWEoOhwcUYn0mfD8cFWLo8",
   authDomain: "domotic-ur.firebaseapp.com",
   databaseURL: "https://domotic-ur-default-rtdb.firebaseio.com/",
-  storageBucket: "bucket.appspot.com",
 };
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);

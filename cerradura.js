@@ -96,6 +96,8 @@ function print(message) {
       console.dir(err);
       return;
     }
-    console.log(data);
+    lolcatjs.options.seed = Math.round(Math.random() * 1000);
+    lolcatjs.options.colors = true;
+    lolcatjs.fromString(data);
   });
 }

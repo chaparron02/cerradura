@@ -39,6 +39,9 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 const starCountRef = ref(database, "locks/Test/is_locked");
+
+abrir();
+
 onValue(starCountRef, (snapshot) => {
   const data = snapshot.val();
   if (data) {
@@ -47,8 +50,6 @@ onValue(starCountRef, (snapshot) => {
     abrir();
   }
 });
-
-abrir();
 
 boton.on("interrupt", function (level) {
   if (level == 0) {

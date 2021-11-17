@@ -84,7 +84,7 @@ function cerrar() {
   // Despues de 1.5 segundos, apagamos el motor para que no se dañe
   setTimeout(function () {
     motor.servoWrite(0);
-  }, 150);
+  }, 74);
 }
 
 function print(message) {

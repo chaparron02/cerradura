@@ -72,7 +72,7 @@ function abrir() {
   // Despues de 1.5 segundos, apagamos el motor para que no se dañe
   setTimeout(function () {
     motor.servoWrite(0);
-  }, 35);
+  }, 60);
 }
 
 function cerrar() {
@@ -84,7 +84,7 @@ function cerrar() {
   // Despues de 1.5 segundos, apagamos el motor para que no se dañe
   setTimeout(function () {
     motor.servoWrite(0);
-  }, 70);
+  }, 80);
 }
 
 function print(message) {
